@@ -1,0 +1,131 @@
+1)select ename,job,sal*12 as Annaul_sal,emp.deptno,dname
+from emp,dept
+where emp.deptno=dept.deptno and sal*12=30000 and job!='CLERKS';
+
+2) select e1.ename "Employee name",e1.empno as Employee_id,e2.ename as Managername,e2.empno as Manager_Id
+ from emp e1,emp e2
+ where e1.mgr=e2.empno;
+
+3)select ename,dname
+from emp left join dept
+on emp.deptno=dept.deptno
+union
+select ename,dname
+from emp right join dept
+on emp.deptno=dept.deptno;
+
+4)select sum(sal) as Total_Sal,dname
+from emp,dept
+where emp.deptno=dept.deptno
+Group by dname;
+
+5)select ename,dname
+from emp,dept
+where emp.deptno=dept.deptno;
+
+6)select loc
+from emp,dept
+where emp.deptno=dept.deptno and comm is not null;
+
+7)select dname
+from dept 
+where deptno=(select deptno
+from emp
+where sal=(select min(sal)
+from emp
+where mgr is null));
+
+8)select dname,loc
+  from dept
+  where deptno=(select deptno
+  from emp
+  where empno=(select mgr
+  from emp
+  where ename='SMITH'));
+
+9) SELECT DNAME,LOC 
+FROM DEPT,EMP 
+WHERE DEPT.DEPTNO=EMP.DEPTNO AND JOB IN(‘SALESMAN’,’MANAGER’) AND EMPNO IN(SELECT MGR FROM EMP WHERE JOB=’MANAGER’);
+
+10) SELECT ENAME
+ FROM EMP,DEPT
+ where emp.deptno=dept.deptno and dname='RESEARCH' AND JOB='MANAGER';
+
+11) select count(ename)
+ from emp
+ where sal<(select sal
+ from emp where empno=(select mgr
+ from emp
+ where ename='BLAKES'));
+
+12)SELECT ENAME,DNAME,LOC
+   FROM EMP,DEPT
+   WHERE JOB='ANALYST' AND empno=(select mgr
+   from emp
+   where ename='BLAKES');
+
+13)select ename,hiredate,comm
+from emp
+where empno=(Select mgr
+from emp
+where ename='FORD');
+
+14)SELECT ENAME,DNAME
+FROM EMP,DEPT
+WHERE SAL<(SELECT AVG(SAL)
+FROM EMP
+WHERE DEPTNO=30);
+
+15)SELECT ENAME,DNAME,LOC
+FROM EMP,DEPT
+WHERE EMPNO=(SELECT MGR FROM EMP
+WHERE ENAME='JONES');
+
+16)SELECT ENAME,DNAME
+FROM EMP,DEPT
+WHERE ENAME LIKE 'S%';
+
+17)SELECT DNAME
+FROM DEPT
+WHERE DEPTNO=(SELECT DEPTNO
+FROM EMP
+WHERE EMPNO IS NULL);
+
+18)SELECT A.ENAME FROM EMP A ,EMP B
+WHERE A.COMM=B.COMM AND A.EMPNO<>B.EMPNO AND
+B.COMM IS NOT NULL AND A.COMM IS NOT NULL;
+
+19)SELECT DNAME FROM DEPT;
+
+20)SELECT ENAME,JOB,DNAME,LOC
+FROM EMP,DEPT
+WHERE EMP.DEPTNO=DEPT.DEPTNO AND JOB='MANAGER' AND LOC='CHICAGO';
+
+21)select dname
+from emp, dept
+Where emp.deptno = dept.deptno and hiredate between '01-01-1981' and '31-12-1982' and sal > 1800;
+
+22)select avg(sal)
+from emp
+where sal < (select avg(sal)
+from emp);
+
+23)select *
+from emp
+here sal*12>1500 and hiredate < '01-01-1982';
+
+24)SELECT DNAME,LOC,DEPTNO 
+FROM DEPT WHE
+RE DEPTNO IN(SELECT A.DEPTNO FROM EMP A,EMP B WHERE A.MGR=B.MGR AND A.EMPNO<>B.EMPNO);
+
+25)select e.ename as Emp_name, e2.ename as Manager_name
+from emp e, emp e2
+where e.mgr= e2.empno;
+
+26)select ename, dname
+from emp, dept
+where emp.deptno=dept.deptno and ename like 'S%';
+
+27)SELECT A.ENAME 
+FROM EMP A,EMP B 
+WHERE A.SAL=B.SAL AND A.EMPNO<>B.EMPNO;
